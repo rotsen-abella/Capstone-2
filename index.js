@@ -10,7 +10,16 @@ const app = express();
 
 
 //MongoDb Connection
-mongoose.connect("mongodb+srv://admin:admin123@b402-course-booking.ywsrv4a.mongodb.net/ecommerce-api?retryWrites=true&w=majority&appName=B402-course-booking");
+mongoose.connect("mongodb+srv://admin:admin123@b402-course-booking.3ncrnzy.mongodb.net/course-booking-API?retryWrites=true&w=majority&appName=B402-Course-Booking");
+
+//[Connection String (Miranda)]
+//mongodb+srv://admin:admin123@b402-course-booking.3ncrnzy.mongodb.net/course-booking-API?retryWrites=true&w=majority&appName=B402-Course-Booking
+
+//[Connection String (Abella)]
+//mongodb+srv://admin:admin123@b402-course-booking.ywsrv4a.mongodb.net/ecommerce-api?retryWrites=true&w=majority&appName=B402-course-booking
+
+
+
 
 let db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error"));
