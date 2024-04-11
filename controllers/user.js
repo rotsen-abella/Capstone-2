@@ -111,24 +111,20 @@ module.exports.updateUserAsAdmin = async (req, res) => {
     }
 };
 module.exports.updatePassword = async (req, res) => {
-    const { id } = req.body;
-    const { newPassword } = req.body;
-
     try {
-        // Find the user by userId
-        let user = await User.findById(id);
-
-        if (!user) {
-            return res.status(404).json({ message: "User not found" });
-        }
-
-        // Update the user's password
-        user.password = newPassword;
-        await user.save();
-
-        return res.status(200).json({ message: "User password updated successfully" });
-    } catch (error) {
-        console.error("Error updating user password:", error);
-        return res.status(500).json({ message: "Internal server error" });
-    }
-};
+        const { newPassword } = req.body;
+        const { id } = req.user; // Extracting user ID from the authorization header
+    
+        // Hashing the new password
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
+    
+        // Updating the user's password in the database
+        await User.findByIdAndUpdate(id, { password: hashedPassword });
+    
+        // Sending a success response
+        res.status(200).json({ message: 'Password updated successfully' });
+      } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal server error' });
+      }
+    };
