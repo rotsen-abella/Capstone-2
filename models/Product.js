@@ -1,18 +1,18 @@
 const mongoose = require('mongoose');
 
 const productSchema = new mongoose.Schema({
-
+    
     name: {
         type: String,
-        required: [true, "Product name is required"]
+        required: [true, "Name is required"]
     },
-    description:{
+    description: {
         type: String,
-        required: [true, "Product description is required"]
+        required: [true, "Description is required"]
     },
     price: {
         type: Number,
-        required: [true, "Product Price is required"]
+        required: [true, "Price is required"]
     },
     isActive: {
         type: Boolean,
@@ -22,6 +22,7 @@ const productSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     }
-})
+});
+
 
 module.exports = mongoose.model("Product", productSchema);
