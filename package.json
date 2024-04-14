@@ -18,5 +18,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "Capstone 2: E-Commerce API",
+  "repository": {
+    "type": "git",
+    "url": "git@ec2-54-147-90-61.compute-1.amazonaws.com:B402/csp2-b402-abella-miranda.git"
+  }
 }
