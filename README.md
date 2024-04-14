@@ -24,8 +24,20 @@ Features:
 			User Registration
 			User Authentication
 
+		Product Resources:
+			Retrieve Single Product
+			Update Product Infromation
+			Archive Product
+			Activate Product
+
+
 	Features by Peter Miranda
 		User Resources:
 			Set user as Admin (Admin only)
 			Retrieve User Details
 			Update Password
+		
+		Product Resources:
+			Create Product
+			Retrieve All Products
+			Retrieve All Active Products
