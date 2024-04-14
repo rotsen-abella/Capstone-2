@@ -3,6 +3,7 @@ const mongoose = require ('mongoose');
 
 //Access to routes
 const userRoutes = require("./routes/user");
+const productRoutes = require("./routes/product");
 
 const port = 4000;
 
@@ -10,6 +11,7 @@ const app = express();
 
 
 //MongoDb Connection
+
 mongoose.connect("mongodb+srv://admin:admin123@b402-course-booking.ywsrv4a.mongodb.net/ecommerce-api?retryWrites=true&w=majority&appName=B402-course-booking");
 
 //[Connection String (Miranda)]
@@ -30,6 +32,7 @@ app.use(express.urlencoded({extended:true}));
 
 //Routes
 app.use('/users', userRoutes);
+app.use('/products',productRoutes);
 
 
 if(require.main === module){

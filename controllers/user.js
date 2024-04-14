@@ -113,15 +113,15 @@ module.exports.updateUserAsAdmin = async (req, res) => {
 module.exports.updatePassword = async (req, res) => {
     try {
         const { newPassword } = req.body;
-        const { id } = req.user; // Extracting user ID from the authorization header
+        const { id } = req.user; 
     
-        // Hashing the new password
+        
         const hashedPassword = await bcrypt.hash(newPassword, 10);
     
-        // Updating the user's password in the database
+        
         await User.findByIdAndUpdate(id, { password: hashedPassword });
     
-        // Sending a success response
+        
         res.status(200).json({ message: 'Password updated successfully' });
       } catch (error) {
         console.error(error);
