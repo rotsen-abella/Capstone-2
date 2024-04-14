@@ -115,13 +115,10 @@ module.exports.updatePassword = async (req, res) => {
     try {
         const { newPassword } = req.body;
         const { id } = req.body; 
-    
-        
+           
         const hashedPassword = await bcrypt.hash(newPassword, 10);
-    
-        
+            
         await User.findByIdAndUpdate(id, { password: hashedPassword });
-    
         
         res.status(200).json({ message: 'Password updated successfully' });
       } catch (error) {
