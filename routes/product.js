@@ -13,5 +13,17 @@ router.get("/all", verify, verifyAdmin, productController.getAllProducts);
 //Retrieve all active products
 router.get("/", productController.getAllActiveProduct);
 
+//Route for retrieving single product
+router.get("/:productId", productController.getProduct);
+
+//Route for updating product information
+router.patch("/:productId/update", verify, verifyAdmin, productController.updateProduct);
+
+//Router for archiving a product
+router.patch("/:productId/archive", verify, verifyAdmin, productController.archiveProduct);
+
+//Router for activating a product
+router.patch("/:productId/activate", verify, verifyAdmin, productController.activateProduct);
+
 
 module.exports = router;

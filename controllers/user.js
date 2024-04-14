@@ -113,7 +113,7 @@ module.exports.updateUserAsAdmin = async (req, res) => {
 module.exports.updatePassword = async (req, res) => {
     try {
         const { newPassword } = req.body;
-        const { id } = req.user; 
+        const { id } = req.body; 
     
         
         const hashedPassword = await bcrypt.hash(newPassword, 10);

@@ -31,7 +31,7 @@ module.exports.createProduct = (req, res) => {
 
 module.exports.getAllProducts = (req, res) => {
 
-    return Products.find({})
+    return Product.find({})
     .then(products => {
         if(products.length > 0){
             return res.status(200).send({products});
@@ -60,4 +60,103 @@ module.exports.getAllActiveProduct = (req, res) => {
         return res.status(500).send({error: 'Error in finding active products.'})
     });
 
+};
+
+module.exports.getProduct = (req, res) => {
+
+    const productId = req.params.productId;
+    Product.findById(productId)
+    .then(product => {
+        if(!product){
+            return res.status(404).send({error: 'Product notr found'});
+        }
+        return res.status(200).send({product});
+    })
+    .catch(err => {
+        console.error("Error in fetching the product: ", err)
+        return res.status(500).send({ error: 'Failed to fetch product' });
+    });
+};
+
+module.exports.updateProduct = (req, res) => {
+
+    let updatedProduct = {
+        name: req.body.name,
+        description: req.body.description,
+        price: req.body.price
+    }
+
+    return Product.findByIdAndUpdate(req.params.productId, updatedProduct, {new: true})
+    .then(updatedProduct => {
+
+        if(updatedProduct) {
+            res.status(200).send({
+                message: 'Product updated successfully',
+                updatedProduct: updatedProduct   
+            });
+        } else {
+            res.status(404).send({error: 'Product not found'})
+        }
+    })
+    .catch(err => {
+        console.error("Error in updating product :", err)
+        return res.status(500).send({error: 'Error in updating product'})
+    });
+
+}
+
+module.exports.archiveProduct = (req, res) => {
+
+    let updateActiveField = {
+        isActive: false
+    }
+
+    if (req.user.isAdmin == true){
+        return Product.findByIdAndUpdate(req.params.productId, updateActiveField, {new:true})
+        .then(archiveProduct => {
+            if (archiveProduct) {
+                res.status(200).send({
+                    message: 'Product archived successfully', 
+                    archiveProduct: archiveProduct     
+                });
+            } else {
+                res.status(400).send({ error: 'Product not found' });
+            }
+        })
+        .catch(err => {
+            console.error("Error in archiving a product: ", err)
+            return res.status(500).send({ error: 'Failed to archive product' })
+        });
+    }
+    else{
+        return res.status(403).send(false);
+    }
+};
+
+module.exports.activateProduct = (req, res) => {
+
+    let updateActiveField = {
+        isActive: true
+    }
+    
+    if (req.user.isAdmin == true){
+        return Product.findByIdAndUpdate(req.params.productId, updateActiveField, {new:true})
+        .then(activateProduct => {
+            if (activateProduct) {
+                res.status(200).send({
+                    message: 'Product activated successfully', 
+                    activateProduct: activateProduct
+                });
+            } else {
+                res.status(400).send({error: "Product not found"});
+            }
+        })
+        .catch(err => {
+            console.error("Error in activating a product: ", err)
+            return res.status(500).send({ error: 'Failed to activating a product' })
+        });
+    }
+    else{
+        return res.status(403).send(false);
+    }
 };
