@@ -31,4 +31,10 @@ router.get('/name', productController.searchProductsByName);
 // Search products by price range
 router.get('/by-price', productController.searchProductsByPriceRange);
 
+router.post('/products/searchByName', productController.searchProductsByName);
+
+// Search products by price range
+router.post('/products/searchByPrice', productController.searchProductsByPriceRange);
+
+
 module.exports = router;
