@@ -127,16 +127,4 @@ module.exports.updatePassword = async (req, res) => {
       }
     };
 
-    module.exports.getCart = (req, res) => {
-        return Cart.find({userId : req.user.id})
-            .then(cart => {
-                if (cart.length > 0){
-                    return res.status(200).send({cart});
-                }
-                return res.status(404).send({error: "Cart is empty"});
-            })
-            .catch(err => {
-                console.error("Error in fetching enrollments")
-        	return res.status(500).send({ error: 'Failed to fetch cart' })
-            })
-    };
+    

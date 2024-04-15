@@ -3,10 +3,14 @@ const cartController = require("../controllers/cart");
 const { verify, verifyAdmin } = require("../auth");
 const router = express.Router();
 
+
+//Route for getting user's cart
+router.get("/get-cart", verify, cartController.getCart);
+
 //add to cart
-router.post('/add-to-cart', verify, verifyAdmin, cartController.addToCart);
+router.post('/add-to-cart', verify, cartController.addToCart);
 
 //update cart
-router.patch('/update-cart-quantity', verify, verifyAdmin, cartController.updateCart)
+router.post('/update-cart-quantity', verify, cartController.updateCart)
 
 module.exports = router;
