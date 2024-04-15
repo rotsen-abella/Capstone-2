@@ -176,7 +176,7 @@ module.exports.searchProductsByName = async (req, res) => {
 // Search products by price range
 module.exports.searchProductsByPriceRange = async (req, res) => {
     try {
-        const { minPrice, maxPrice } = req.query;
+        const { minPrice, maxPrice } = req.body;
         const products = await Product.find({ price: { $gte: minPrice, $lte: maxPrice } });
         res.status(200).json({ products });
     } catch (error) {

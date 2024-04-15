@@ -32,6 +32,8 @@ Features:
 
 		Cart Resources:
 			Retrieve Cart
+			Remove Item from Cart
+			Clear Cart
 
 
 	Features by Peter Miranda
@@ -44,6 +46,8 @@ Features:
 			Create Product
 			Retrieve All Products
 			Retrieve All Active Products
+			Search Products by Name
+			Search Products by Price Range
 		
 		Cart Resources:
 			Add to Cart

@@ -26,15 +26,10 @@ router.patch("/:productId/archive", verify, verifyAdmin, productController.archi
 router.patch("/:productId/activate", verify, verifyAdmin, productController.activateProduct);
 
 // Search products by name
-router.get('/name', productController.searchProductsByName);
+router.post('/searchByName', productController.searchProductsByName);
 
 // Search products by price range
-router.get('/by-price', productController.searchProductsByPriceRange);
-
-router.post('/products/searchByName', productController.searchProductsByName);
-
-// Search products by price range
-router.post('/products/searchByPrice', productController.searchProductsByPriceRange);
+router.post('/searchByPrice', productController.searchProductsByPriceRange);
 
 
 module.exports = router;
