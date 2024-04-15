@@ -30,6 +30,9 @@ Features:
 			Archive Product
 			Activate Product
 
+		Cart Resources:
+			Retrieve Cart
+
 
 	Features by Peter Miranda
 		User Resources:
@@ -41,3 +44,7 @@ Features:
 			Create Product
 			Retrieve All Products
 			Retrieve All Active Products
+		
+		Cart Resources:
+			Add to Cart
+			Update Product Quantity
