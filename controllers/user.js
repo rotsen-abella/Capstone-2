@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const Cart = require("../models/Cart");
 const auth = require('../auth');
 const bcrypt = require("bcrypt");
 
@@ -113,16 +114,11 @@ module.exports.updateUserAsAdmin = async (req, res) => {
 module.exports.updatePassword = async (req, res) => {
     try {
         const { newPassword } = req.body;
-
-        const { id } = req.user; 
-
-    
-        
+        const { id } = req.body; 
+           
         const hashedPassword = await bcrypt.hash(newPassword, 10);
-    
-        
+            
         await User.findByIdAndUpdate(id, { password: hashedPassword });
-    
         
         res.status(200).json({ message: 'Password updated successfully' });
       } catch (error) {
@@ -130,3 +126,5 @@ module.exports.updatePassword = async (req, res) => {
         res.status(500).json({ message: 'Internal server error' });
       }
     };
+
+    
