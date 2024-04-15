@@ -164,7 +164,7 @@ module.exports.activateProduct = (req, res) => {
 // Search products by name
 module.exports.searchProductsByName = async (req, res) => {
     try {
-        const { name } = req.query;
+        const { name } = req.body;
         const products = await Product.find({ name: { $regex: name, $options: 'i' } });
         res.status(200).json({ products });
     } catch (error) {

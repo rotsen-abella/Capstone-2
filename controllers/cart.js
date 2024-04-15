@@ -100,3 +100,75 @@ module.exports.updateCart = async (req, res) => {
         res.status(500).json({ error: 'Failed to update cart quantity' });
     }
 };
+
+
+module.exports.removeFromCart = async (req, res) => {
+    try {
+        // Find the cart with the user's id from the token
+        const cart = await Cart.findOne({ userId: req.user.id });
+
+        // If no cart document with the current user's id can be found, send a message to the client
+        if (!cart) {
+            return res.status(404).json({ message: "Cart not found" });
+        }
+
+        // Extract productId from request params
+        const { productId } = req.params;
+
+        // Check if the cart's cartItems array contains the id of the product to be removed
+        const indexToRemove = cart.cartItems.findIndex(item => item.productId === productId);
+
+        if (indexToRemove !== -1) {
+            // If the product exists in the cart, remove it
+            cart.cartItems.splice(indexToRemove, 1);
+        } else {
+            // If the product doesn't exist in the cart, send a message to the client
+            return res.status(404).json({ message: "Product not found in the cart" });
+        }
+
+        // Update the totalPrice value of the cart
+        cart.totalPrice = cart.cartItems.reduce((total, item) => total + item.subtotal, 0);
+
+        // Save the cart document
+        await cart.save();
+
+        // Send a success message to the client along with the updated cart contents
+        res.status(200).json({ message: "Item removed from cart successfully", cart });
+    } catch (err) {
+        // Catch an error while updating the cart and send a message to the client along with the error details
+        console.error(err);
+        res.status(500).json({ message: "Error in removing item from cart", err });
+    }
+}
+
+module.exports.clearCart = async (req, res) => {
+    try {
+        // Find the cart with the user's id from the token
+        const cart = await Cart.findOne({ userId: req.user.id });
+
+        // If no cart document with the current user's id can be found, send a message to the client
+        if (!cart) {
+            return res.status(404).json({ message: "Cart not found" });
+        }
+
+        // Check if the cart has at least 1 item
+        if (cart.cartItems.length > 0) {
+            // If the cart has items, clear all items from the cartItem array and update totalPrice to 0
+            cart.cartItems = [];
+            cart.totalPrice = 0;
+        } else {
+            // If the cart is already empty, send a message to the client
+            return res.status(400).json({ message: "Cart is already empty" });
+        }
+
+        // Save the cart document
+        await cart.save();
+
+        // Send a success message to the client along with the updated cart contents
+        res.status(200).json({ message: "Cart cleared successfully", cart });
+    } catch (err) {
+        // Catch an error while updating the cart and send a message to the client along with the error details
+        console.error(err);
+        res.status(500).json({ message: "Error in clearing cart", err });
+    }
+}
