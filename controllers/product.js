@@ -160,3 +160,27 @@ module.exports.activateProduct = (req, res) => {
         return res.status(403).send(false);
     }
 };
+
+// Search products by name
+module.exports.searchProductsByName = async (req, res) => {
+    try {
+        const { name } = req.query;
+        const products = await Product.find({ name: { $regex: name, $options: 'i' } });
+        res.status(200).json({ products });
+    } catch (error) {
+        console.error('Error searching products by name:', error);
+        res.status(500).json({ error: 'Failed to search products by name' });
+    }
+};
+
+// Search products by price range
+module.exports.searchProductsByPriceRange = async (req, res) => {
+    try {
+        const { minPrice, maxPrice } = req.query;
+        const products = await Product.find({ price: { $gte: minPrice, $lte: maxPrice } });
+        res.status(200).json({ products });
+    } catch (error) {
+        console.error('Error searching products by price range:', error);
+        res.status(500).json({ error: 'Failed to search products by price range' });
+    }
+};
