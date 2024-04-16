@@ -1,5 +1,7 @@
 const nodemailer = require('nodemailer');
-const crypto = require('crypto');
+
+const bcrypt = require('bcrypt');
+
 // Create a transporter using SMTP transport
 const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -28,5 +30,20 @@ exports.sendResetPasswordEmail = async (recipient, token) => {
     }
 };
 
+async function hashPassword(password) {
+    const saltRounds = 10; // Number of salt rounds
+    try {
+        const hashedPassword = await bcrypt.hash(password, saltRounds);
+        return hashedPassword;
+    } catch (error) {
+        throw new Error('Error hashing password: ' + error.message);
+    }
+}
 
+module.exports = { hashPassword };
 
+const sendResetPasswordEmail = async (email, token) => {
+    // Your code to send the reset password email
+};
+
+module.exports = { sendResetPasswordEmail };
