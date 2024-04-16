@@ -18,6 +18,8 @@ router.patch("/:id/set-as-admin", verify, verifyAdmin, userController.updateUser
 //Route for updating password
 router.patch('/update-password', verify, userController.updatePassword);
 
+// Route for resetting password with email confirmation
+router.post('/reset', userController.resetPassword);
 
 
 
