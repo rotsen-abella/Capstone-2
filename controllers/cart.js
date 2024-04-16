@@ -33,7 +33,10 @@ module.exports.addToCart = async (req, res) => {
         }
 
         // Check if the cart's cartItems array already contains the id of the product to be added
-        const { productId, quantity, subtotal } = req.body;
+        const { productId, quantity } = req.body;
+
+        const product = await Product.findById(productId);
+        const subtotal = product.price * quantity;
         const existingItemIndex = cart.cartItems.findIndex(item => item.productId === productId);
 
         if (existingItemIndex !== -1) {
@@ -71,8 +74,10 @@ module.exports.updateCart = async (req, res) => {
         }
         
         // Extract product ID and new quantity from request body
-        const { productId, quantity, subtotal } = req.body;
+        const { productId, quantity } = req.body;
 
+        const product = await Product.findById(productId);
+        const subtotal = product.price * quantity;
         // Find the item in the cart
         const item = cart.cartItems.find(item => item.productId === productId);
 
