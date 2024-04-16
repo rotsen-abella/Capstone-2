@@ -19,17 +19,16 @@ router.patch("/:id/set-as-admin", verify, verifyAdmin, userController.updateUser
 router.patch('/update-password', verify, userController.updatePassword);
 
 
+
 //STRETCH GOALS
 //Route for user registration with email confirmation
 // router.post("/register-with-email-confirmation", userController.registerWithEmailConfirmation);
 
+// Route for requesting a password reset
+router.post('/reset-request', userController.requestPasswordReset);
+
 // Route for resetting password with email confirmation
-// router.post('/reset', userController.resetPassword);
-
-
-
-
-
+router.post('/reset', userController.resetPassword);
 
 module.exports = router;
 
