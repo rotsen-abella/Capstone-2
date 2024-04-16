@@ -2,6 +2,7 @@ const User = require("../models/User");
 const Cart = require("../models/Cart");
 const auth = require('../auth');
 const bcrypt = require("bcrypt");
+const { generateConfirmationToken, sendConfirmationEmail } = require('../utils/email');
 const { v4: uuidv4 } = require('uuid');
 const { sendResetPasswordEmail } = require('../utils/email');
 
@@ -113,6 +114,7 @@ module.exports.updateUserAsAdmin = async (req, res) => {
         return res.status(500).json({ message: "Internal server error" });
     }
 };
+
 module.exports.updatePassword = async (req, res) => {
     try {
         const { newPassword } = req.body;
@@ -129,28 +131,101 @@ module.exports.updatePassword = async (req, res) => {
       }
     };
 
-// Controller for resetting password with email confirmation
-module.exports.resetPassword = async (req, res) => {
-    try {
-        const { email, token, newPassword } = req.body;
 
-        // Find the user with the provided email and password reset token
-        const user = await User.findOne({ email, passwordResetToken: token });
-        if (!user) {
-            return res.status(404).json({ error: 'Invalid or expired token' });
-        }
 
-        // Hash the new password
-        const hashedPassword = await bcrypt.hash(newPassword, 10);
 
-        // Update user's password and clear the password reset token
-        user.password = hashedPassword;
-        user.passwordResetToken = undefined;
-        await user.save();
 
-        res.status(200).json({ message: 'Password reset successful' });
-    } catch (error) {
-        console.error('Error resetting password:', error);
-        res.status(500).json({ error: 'Failed to reset password' });
-    }
-};
+// [SECTION] STRETCH GOALS
+
+// module.exports.confirmEmail = async (req, res) => {
+//     const { token } = req.params;
+
+//     try {
+//         const user = await User.findOne({ confirmationToken: token });
+
+//         if (!user) {
+//             return res.status(400).json({ message: 'Invalid confirmation token' });
+//             }
+
+//     // Update user's email confirmation status
+//         user.isEmailConfirmed = true;
+//         user.confirmationToken = undefined; // Clear confirmation token
+//         await user.save();
+
+//         return res.redirect('/confirmation-success');
+//     } catch (error) {
+//         console.error(error);
+//         res.status(500).json({ message: 'Internal Server Error' });
+//     }
+// };
+
+// module.exports.registerWithEmailConfirmation = async (req, res) => {
+
+
+//     try {
+//         // Validate email format
+//         if (!req.body.email.includes("@")) {
+//             return res.status(400).send({ error: "Email invalid" });
+//         }
+
+//         // Validate mobile number format
+//         else if (req.body.mobileNo.length !== 11) {
+//             return res.status(400).send({ error: "Mobile number invalid" });
+//         }
+
+//         // Validate password length
+//         else if (req.body.password.length < 8) {
+//             return res.status(400).send({ error: "Password must be at least 8 characters" });
+//         } else {
+//             // Generate confirmation token
+//             const confirmationToken = generateConfirmationToken();
+
+//             // Create new user
+//             const newUser = new User({
+//                 firstName: req.body.firstName,
+//                 lastName: req.body.lastName,
+//                 email: req.body.email,
+//                 mobileNo: req.body.mobileNo,
+//                 password: bcrypt.hashSync(req.body.password, 10),
+//                 confirmationToken
+//             });
+
+//             await newUser.save();
+
+//             // Send confirmation email
+//             await sendConfirmationEmail(newUser.email, confirmationToken);
+
+//             return res.status(201).send({ message: "Registered Successfully. Please check your email for confirmation." });
+//         }
+//     } catch (error) {
+//         console.error("Error in saving: ", error);
+//         return res.status(500).send({ error: "Internal Server Error" });
+//     }
+// };
+
+// // Controller for resetting password with email confirmation
+// module.exports.resetPassword = async (req, res) => {
+//     try {
+//         const { email, token, newPassword } = req.body;
+
+//         // Find the user with the provided email and password reset token
+//         const user = await User.findOne({ email, passwordResetToken: token });
+//         if (!user) {
+//             return res.status(404).json({ error: 'Invalid or expired token' });
+//         }
+
+//         // Hash the new password
+//         const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+//         // Update user's password and clear the password reset token
+//         user.password = hashedPassword;
+//         user.passwordResetToken = undefined;
+//         await user.save();
+
+//         res.status(200).json({ message: 'Password reset successful' });
+//     } catch (error) {
+//         console.error('Error resetting password:', error);
+//         res.status(500).json({ error: 'Failed to reset password' });
+//     }
+// };
+

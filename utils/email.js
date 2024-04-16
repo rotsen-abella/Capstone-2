@@ -1,5 +1,5 @@
 const nodemailer = require('nodemailer');
-
+const crypto = require('crypto');
 // Create a transporter using SMTP transport
 const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -27,3 +27,6 @@ exports.sendResetPasswordEmail = async (recipient, token) => {
         throw new Error('Failed to send password reset email');
     }
 };
+
+
+
