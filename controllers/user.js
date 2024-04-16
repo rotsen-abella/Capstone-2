@@ -129,6 +129,32 @@ module.exports.updatePassword = async (req, res) => {
       }
     };
 
+module.exports.requestPasswordReset = async (req, res) => {
+    try {
+        const { email } = req.body;
+
+        // Check if the user with the provided email exists
+        const user = await User.findOne({ email });
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        // Generate a unique token for password reset
+        const token = uuidv4();
+
+        // Save the token to the user document
+        user.passwordResetToken = token;
+        await user.save();
+
+        // Send password reset email with token
+        await sendResetPasswordEmail(user.email, token);
+
+        res.status(200).json({ message: 'Password reset email sent successfully' });
+    } catch (error) {
+        console.error('Error requesting password reset:', error);
+        res.status(500).json({ error: 'Failed to request password reset' });
+    }
+};
 // Controller for resetting password with email confirmation
 module.exports.resetPassword = async (req, res) => {
     try {
