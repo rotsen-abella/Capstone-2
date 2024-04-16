@@ -6,17 +6,17 @@ const bcrypt = require('bcrypt');
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: 'your_email@gmail.com', // Your Gmail email address
-        pass: 'your_email_password'   // Your Gmail password
+        user: process.env.EMAIL_USER, // Your Gmail email address
+        pass: process.env.EMAIL_PASS   // Your Gmail password
     }
 });
 
 // Function to send password reset email
-exports.sendResetPasswordEmail = async (recipient, token) => {
+module.exports.sendResetPasswordEmail = async (recipient, token) => {
     try {
         // Email message
         const mailOptions = {
-            from: 'your_email@gmail.com', // Sender address (must be the same as auth.user)
+            from: process.env.EMAIL_USER, // Sender address (must be the same as auth.user)
             to: recipient,                // Recipient address
             subject: 'Password Reset',    // Email subject
             text: `Click the link below to reset your password:\n\nhttp://yourwebsite.com/reset-password?token=${token}` // Email body
@@ -42,8 +42,32 @@ async function hashPassword(password) {
 
 module.exports = { hashPassword };
 
-const sendResetPasswordEmail = async (email, token) => {
-    // Your code to send the reset password email
-};
 
-module.exports = { sendResetPasswordEmail };
+module.exports.verifyEmail = async(email, link) => {
+    try{
+        const transporter = nodemailer.createTransport({
+            service: 'Gmail',
+            auth: {
+                user: process.env.EMAIL_USER, 
+                pass: process.env.EMAIL_PASS   
+            }
+        });
+        let info = await transporter.sendMail({
+            from:process.env.EMAIL_USER,
+            to: email,
+            subject: "Account Verification",
+            text: "Welcome",
+            html:`
+            <div>
+            <a href=${link}>Click Hereto Verify Email</a>
+            </div>
+            `
+        });
+        console.log("Email sent successfully")
+    }
+    catch(error){
+        console.error("Email sending failed", error);
+    }
+}
+
+

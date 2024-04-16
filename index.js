@@ -15,7 +15,7 @@ const app = express();
 //MongoDb Connection
 
 
-mongoose.connect("mongodb+srv://admin:admin123@b402-course-booking.3ncrnzy.mongodb.net/ecommerce-api?retryWrites=true&w=majority&appName=B402-Course-Booking");
+mongoose.connect("mongodb+srv://admin:admin123@b402-course-booking.ywsrv4a.mongodb.net/ecommerce-api?retryWrites=true&w=majority&appName=B402-course-booking");
 
 
 //[Connection String (Miranda)]
