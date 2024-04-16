@@ -19,7 +19,7 @@ module.exports.verify = (req, res, next) => {
 	// console.log("This is the token", token)
 
 	if(typeof token === "undefined") {
-		return res.send({auth: "Failed. No Token."})
+		return res.send({auth: "Authentication Failed. No Token."})
 	} else {
 
 		console.log(token);
@@ -61,7 +61,7 @@ module.exports.verifyAdmin = (req, res, next) => {
 	} else {
 		return res.status(403).send({
 			auth: "Failed",
-			message: "Action Forbidden"
+			message: "You do not have privileges for this action. Only admin users are allowed"
 		})
 	}
 }

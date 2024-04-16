@@ -26,14 +26,17 @@ Features:
 
 		Product Resources:
 			Retrieve Single Product
-			Update Product Infromation
-			Archive Product
-			Activate Product
+			Update Product Infromation (Admin Only)
+			Archive Product (Admin Only)
+			Activate Product (Admin Only)
 
 		Cart Resources:
 			Retrieve Cart
 			Remove Item from Cart
 			Clear Cart
+
+		Order Resources:
+			Create Order (Checkout)
 
 
 	Features by Peter Miranda
@@ -43,8 +46,8 @@ Features:
 			Update Password
 		
 		Product Resources:
-			Create Product
-			Retrieve All Products
+			Create Product (Admin Only)
+			Retrieve All Products (Admin Only)
 			Retrieve All Active Products
 			Search Products by Name
 			Search Products by Price Range
@@ -52,3 +55,7 @@ Features:
 		Cart Resources:
 			Add to Cart
 			Update Product Quantity
+		
+		Order Resources:
+			Get User's Orders
+			Get All Orders (Admin Only)
