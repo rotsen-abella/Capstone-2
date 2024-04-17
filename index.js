@@ -7,7 +7,7 @@ const productRoutes = require("./routes/product");
 const cartRoutes = require("./routes/cart")
 const orderRoutes = require("./routes/order")
 
-const port = 4000;
+const port = 4001;
 
 const app = express();
 
@@ -35,10 +35,10 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
 //Routes
-app.use('/users', userRoutes);
-app.use('/products',productRoutes);
-app.use('/cart',cartRoutes);
-app.use('/orders',orderRoutes);
+app.use('/b1/users', userRoutes);
+app.use('/b1/products',productRoutes);
+app.use('/b1/cart',cartRoutes);
+app.use('/b1/orders',orderRoutes);
 
 
 
