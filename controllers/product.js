@@ -112,7 +112,7 @@ module.exports.archiveProduct = (req, res) => {
     }
 
     if (req.user.isAdmin == true){
-        return Product.findByIdAndUpdate(req.params.productId, updateActiveField, {new:true})
+        return Product.findByIdAndUpdate(req.params.productId, updateActiveField)
         .then(archiveProduct => {
             if (archiveProduct) {
                 res.status(200).send({
@@ -140,7 +140,7 @@ module.exports.activateProduct = (req, res) => {
     }
     
     if (req.user.isAdmin == true){
-        return Product.findByIdAndUpdate(req.params.productId, updateActiveField, {new:true})
+        return Product.findByIdAndUpdate(req.params.productId, updateActiveField)
         .then(activateProduct => {
             if (activateProduct) {
                 res.status(200).send({
@@ -166,10 +166,10 @@ module.exports.searchProductsByName = async (req, res) => {
     try {
         const { name } = req.body;
         const products = await Product.find({ name: { $regex: name, $options: 'i' } });
-        res.status(200).json({ products });
+        res.status(200).send({ products });
     } catch (error) {
         console.error('Error searching products by name:', error);
-        res.status(500).json({ error: 'Failed to search products by name' });
+        res.status(500).send({ error: 'Failed to search products by name' });
     }
 };
 
@@ -178,9 +178,9 @@ module.exports.searchProductsByPriceRange = async (req, res) => {
     try {
         const { minPrice, maxPrice } = req.body;
         const products = await Product.find({ price: { $gte: minPrice, $lte: maxPrice } });
-        res.status(200).json({ products });
+        res.status(200).send({ products });
     } catch (error) {
         console.error('Error searching products by price range:', error);
-        res.status(500).json({ error: 'Failed to search products by price range' });
+        res.status(500).send({ error: 'Failed to search products by price range' });
     }
 };

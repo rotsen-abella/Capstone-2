@@ -13,12 +13,12 @@ module.exports.checkout = async (req, res) => {
 
         // If no cart document with the current user's id can be found, send a message to the client
         if (!cart) {
-            return res.status(404).json({ message: "Cart not found" });
+            return res.status(404).send({ message: "Cart not found" });
         }
 
         // Check if the cart has at least one item
         if (cart.cartItems.length === 0) {
-            return res.status(400).json({ message: "Cart is empty. Unable to checkout" });
+            return res.status(400).send({ message: "Cart is empty. Unable to checkout" });
         }
 
         // Create a new order document using the cart data
@@ -37,11 +37,11 @@ module.exports.checkout = async (req, res) => {
         await cart.save();
 
         // Send a success message to the client along with the created order details
-        res.status(201).json({ message: "Order created successfully", order });
+        res.status(201).send({ message: "Order created successfully", order });
     } catch (err) {
         // Catch an error while creating the order and send a message to the client along with the error details
         console.error({message: "Error in creating order", err});
-        res.status(500).json({ message: "Error in creating order" });
+        res.status(500).send({ message: "Error in creating order" });
     }
 };
 
@@ -49,10 +49,10 @@ module.exports.checkout = async (req, res) => {
 module.exports.getAllOrders = async (req, res) => {
     try {
         const orders = await Order.find();
-        res.status(200).json({ orders });
+        res.status(200).send({ orders });
     } catch (error) {
         console.error('Error retrieving all orders:', error);
-        res.status(500).json({ error: 'Failed to retrieve all orders' });
+        res.status(500).send({ error: 'Failed to retrieve all orders' });
     }
 };
 
@@ -63,12 +63,12 @@ module.exports.getUserOrders = async (req, res) => {
         const orders = await Order.find({ userId: userId });
 
         if (!orders || orders.length === 0) {
-            return res.status(404).json({ message: "No orders found for this user" });
+            return res.status(404).send({ message: "No orders found for this user" });
         }
 
-        res.status(200).json({ orders });
+        res.status(200).send({ orders });
     } catch (error) {
         console.error('Error retrieving user orders:', error);
-        res.status(500).json({ error: 'Failed to retrieve user orders' });
+        res.status(500).send({ error: 'Failed to retrieve user orders' });
     }
 };

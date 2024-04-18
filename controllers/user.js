@@ -107,14 +107,14 @@ module.exports.updateUserAsAdmin = async (req, res) => {
         const updatedUser = await User.findById(id);
 
         if (!updatedUser) {
-            return res.status(404).json({ message: "User not found" });
+            return res.status(404).send({ message: "User not found" });
         }
         updatedUser.isAdmin = true;
         await updatedUser.save();
-        return res.status(200).json({ message: "User updated as admin successfully" });
+        return res.status(200).send({ message: "User updated as admin successfully" });
     } catch (error) {
         console.error("Error updating user as admin:", error);
-        return res.status(500).json({ message: "Error in updating as admin" });
+        return res.status(500).send({ message: "Error in updating as admin" });
     }
 };
 
@@ -127,10 +127,10 @@ module.exports.updatePassword = async (req, res) => {
             
         await User.findByIdAndUpdate(id, { password: hashedPassword });
         
-        res.status(200).json({ message: 'Password updated successfully' });
+        res.status(200).send({ message: 'Password updated successfully' });
       } catch (error) {
         console.error('Error in updating password', error);
-        res.status(500).json({ message: 'Error in updating password' });
+        res.status(500).send({ message: 'Error in updating password' });
       }
     };
 
