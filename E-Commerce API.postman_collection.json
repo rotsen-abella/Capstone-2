@@ -13,7 +13,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"firstName\": \"Shopper2\",\r\n    \"lastName\": \"Shopper2\",\r\n    \"email\": \"shopper2@gmail.com\",\r\n    \"password\": \"shopper21234\",\r\n    \"mobileNo\": \"09097654321\"\r\n}",
+					"raw": "{\r\n    \"firstName\": \"Shopper3\",\r\n    \"lastName\": \"Shopper3\",\r\n    \"email\": \"shopper3@gmail.com\",\r\n    \"password\": \"shopper31234\",\r\n    \"mobileNo\": \"09097654321\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -46,7 +46,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"email\": \"admin@gmail.com\",\r\n    \"password\": \"admin1234\"\r\n}",
+					"raw": "{\r\n    \"email\": \"shopper3@gmail.com\",\r\n    \"password\": \"1234shopper3\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -80,7 +80,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MWYyYzkyYWYxOWNiNWNmZjY0N2NhMCIsImVtYWlsIjoic2hvcHBlcjJAZ21haWwuY29tIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTcxMzMxOTEyMH0.YK2b0APVODtjOXKe10tH5TrPT2A1HqzAMvJ4Q1LTLaU",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MjIxNTAxNWFiMWNlYTM4NGVmNWM4OCIsImVtYWlsIjoic2hvcHBlcjNAZ21haWwuY29tIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTcxMzUwOTY1Nn0.fBeK5aZwtKwXF6Hq2rz_FzTngvuqV9WN57pxojmOb1k",
 							"type": "string"
 						}
 					]
@@ -114,7 +114,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MTdhNDg2MmY1NWE3NjZkOTU3ZTJkNCIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNzEzMzIwNzU4fQ.kD75huzRfn_VzZhxpnXpfwQXAYq4iBcyhGdZt4JRDME",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MTdhNDg2MmY1NWE3NjZkOTU3ZTJkNCIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNzEzNTA5NzQzfQ.0oqc00Bfujmy77hIviCZac-DceAOdbTSDH29DZPlxQA",
 							"type": "string"
 						}
 					]
@@ -131,7 +131,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://ec2-3-135-239-184.us-east-2.compute.amazonaws.com/b1/users/661f2c92af19cb5cff647ca0/set-as-admin",
+					"raw": "http://ec2-3-135-239-184.us-east-2.compute.amazonaws.com/b1/users/662215015ab1cea384ef5c88/set-as-admin",
 					"protocol": "http",
 					"host": [
 						"ec2-3-135-239-184",
@@ -143,7 +143,7 @@
 					"path": [
 						"b1",
 						"users",
-						"661f2c92af19cb5cff647ca0",
+						"662215015ab1cea384ef5c88",
 						"set-as-admin"
 					]
 				}
@@ -167,7 +167,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "\r\n{\r\n    \"id\": \"661f15f2e78d8492c9de1a01\",\r\n    \"newPassword\": \"1234shopper1\"\r\n}\r\n",
+					"raw": "\r\n{\r\n    \"id\": \"662215015ab1cea384ef5c88\",\r\n    \"newPassword\": \"1234shopper3\"\r\n}\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -175,12 +175,15 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:4001/b1/users/update-password",
+					"raw": "http://ec2-3-135-239-184.us-east-2.compute.amazonaws.com/b1/users/update-password",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"ec2-3-135-239-184",
+						"us-east-2",
+						"compute",
+						"amazonaws",
+						"com"
 					],
-					"port": "4001",
 					"path": [
 						"b1",
 						"users",
@@ -207,7 +210,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\":\"Bath Towel\",\r\n    \"description\":\"Made of heavy and absorbent cotton\",\r\n    \"price\":\"1000\"\r\n}",
+					"raw": "{\r\n    \"name\":\"Purple Shampoo\",\r\n    \"description\":\"To keep you colored hair healthy\",\r\n    \"price\":\"500\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -215,12 +218,15 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:4001/b1/products/",
+					"raw": "http://ec2-3-135-239-184.us-east-2.compute.amazonaws.com/b1/products/",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"ec2-3-135-239-184",
+						"us-east-2",
+						"compute",
+						"amazonaws",
+						"com"
 					],
-					"port": "4001",
 					"path": [
 						"b1",
 						"products",
@@ -246,12 +252,15 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:4001/b1/products/all",
+					"raw": "http://ec2-3-135-239-184.us-east-2.compute.amazonaws.com/b1/products/all",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"ec2-3-135-239-184",
+						"us-east-2",
+						"compute",
+						"amazonaws",
+						"com"
 					],
-					"port": "4001",
 					"path": [
 						"b1",
 						"products",
@@ -270,12 +279,15 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:4001/b1/products/",
+					"raw": "http://ec2-3-135-239-184.us-east-2.compute.amazonaws.com/b1/products/",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"ec2-3-135-239-184",
+						"us-east-2",
+						"compute",
+						"amazonaws",
+						"com"
 					],
-					"port": "4001",
 					"path": [
 						"b1",
 						"products",
@@ -294,12 +306,15 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:4001/b1/products/661bb2b05df22f4a4d750683",
+					"raw": "http://ec2-3-135-239-184.us-east-2.compute.amazonaws.com/b1/products/661bb2b05df22f4a4d750683",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"ec2-3-135-239-184",
+						"us-east-2",
+						"compute",
+						"amazonaws",
+						"com"
 					],
-					"port": "4001",
 					"path": [
 						"b1",
 						"products",
@@ -326,7 +341,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"description\":\"For silky smooth and fragrant hair\"\r\n}",
+					"raw": "{\r\n    \"description\":\"For silky smooth and beautiful hair\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -757,7 +772,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MWYxNWYyZTc4ZDg0OTJjOWRlMWEwMSIsImVtYWlsIjoic2hvcHBlcjFAZ21haWwuY29tIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTcxMzMxNDg0M30.vOrON--iLf0cAua7nI4xkvYRbQGLwWWoaYkydehHmKc",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MTdhNDg2MmY1NWE3NjZkOTU3ZTJkNCIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNzEzNTA5NzQzfQ.0oqc00Bfujmy77hIviCZac-DceAOdbTSDH29DZPlxQA",
 							"type": "string"
 						}
 					]
