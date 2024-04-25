@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require ('mongoose');
+const cors = require("cors");
 
 //Access to routes
 const userRoutes = require("./routes/user");
@@ -33,6 +34,7 @@ db.once("open", () => console.log("Now connected to MongoDB Atlas"));
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
+app.use(cors());
 
 //Routes
 app.use('/b1/users', userRoutes);
